@@ -152,7 +152,7 @@
   }
 
   #button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   border: none;
   color: white;
   padding: 10px 24px;
