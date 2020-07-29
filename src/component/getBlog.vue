@@ -6,7 +6,7 @@
 
     <div v-for="blog in filteredBlogs" class="single-blog">
       <h2 v-color>{{ blog.title |uppercase}}</h2>
-      <p>{{blog.body|snippet}}</p>
+      <p>{{blog.body | snippet}}</p>
     </div>
    
   </div>  

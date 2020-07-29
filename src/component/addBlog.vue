@@ -1,18 +1,20 @@
 <template>
-  <div id = "add-blog">
+  <div class = "container">
 
-    <h2>Add a new Blog</h2>
+    <h2 v-if="!submitted">Add a new Blog</h2>
 
     <form v-if="!submitted">
 
       <label>Blog Title:</label>
-      <input type="text" v-model.lazy="blog.title" required />
+      <input type="text" class="form-control" v-model.lazy="blog.title" required />
 
-      <label>Blog Content</label>
-      <textarea v-model.lazy="blog.content" ></textarea>
+      <label>Blog Content:</label>
+      <textarea class="form-control" v-model.lazy="blog.content" ></textarea>
+
+       
 
       <div id="checkboxes">
-        <label>Sports</label>
+        <label >Sports</label>
         <input type ="checkbox" value="sports" v-model="blog.categories"/>
         <label>politice</label>
         <input type ="checkbox" value="politice" v-model="blog.categories"/>
@@ -23,33 +25,49 @@
       </div>
 
       <label>Author:</label>
-      <select id="select"  v-model="blog.author">
+      <select class="form-control"  v-model="blog.author">
         <option v-for="author in authors">{{ author }}</option>
       </select>
 
       <br>
 
-      <button  id="button" v-on:click.prevent="post">Add blog</button>
+      <button class="btn btn-success" v-on:click.prevent="post">Add blog</button>
 
     </form>
-    <div v-if="submitted">
-      <h3>Your blog is submittted successfully</h3>
+
+    <div class="alert alert-danger" v-if="submitted" role="alert">
+      <h3>your blog is submitted successfully</h3>
     </div>
+    <!-- <div v-if="submitted">
+      <h3>Your blog is submittted successfully</h3>
+    </div> -->
 
-    <div id ="preview">
-      <h3>Preview Blog</h3>
-      <p>Blog title:{{ blog.title }}</p>
+    <div class="container" v-if="submitted" >
+      <div class="row">
+        <label>
+          <h3>Preview Blog:</h3>
+        </label>
+        <label>
+          <p>Blog title:{{ blog.title }}</p>
+        </label>
 
-      <p>Blog content:</p>
-      <p>{{ blog.content }}</p>
+        <label>
+          <p>Blog content:</p>
+        </label>
+          <p>{{ blog.content }}</p>
+        
+        <label>
+          <p>Blog Categories:</p>
+        </label>
+        <ul>
+          <li v-for="category in blog.categories">{{ category }}</li>
+        </ul>
 
-      <p>Blog Categories:</p>
-      <ul>
-        <li v-for="category in blog.categories">{{ category }}</li>
-      </ul>
+        <label>
+          <p>Blog Author: {{ blog.author }}</p>
+        </label>
 
-      <p>Blog Author: {{ blog.author }}</p>
-
+      </div>
 
     </div>
 
@@ -99,50 +117,15 @@
 </script>
 
 <style>
-
   
+ 
 
-  
-  #add-blog *{
-      box-sizing: border-box;
-      
-  
-  }
-
-  #select{
-     display: block;
-    width: 100%;
-  }
-
-  #add-blog{
-      margin: 20px auto;
-      max-width: 500px;
-  }
   label{
       display: block;
       margin: 20px 0 10px;
   }
-  input[type="text"], textarea{
-      display: block;
-      width: 100%;
-      padding: 8px;
-      border: 2px solid red;
-      border-radius: 4px;
-  }
-  #preview{
-      padding: 10px 20px;
-      border: 1px dotted #ccc;
-      margin: 30px 0;
-      border: 2px solid red;
-      border-radius: 4px;
-  }
-
-  h3{
-      margin-top: 10px;
-
-  }
-
-  #checkboxes input{
+   
+ #checkboxes input{
     display: inline-block;
     margin-right: 10px;
   }
@@ -150,17 +133,5 @@
   #checkboxes label{
     display: inline-block;
   }
-
-  #button {
-  background-color: #4CAF50; 
-  border: none;
-  color: white;
-  padding: 10px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-}
-
 
 </style>
